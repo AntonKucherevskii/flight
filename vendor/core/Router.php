@@ -11,18 +11,33 @@ class Router
     protected static $routes = [];
     protected static $route = [];
 
-    public static function addRoutes($url, $route)
+    public static function add($url, $route)
     {
         self::$routes[$url] = $route;
     }
 
-    public static function showRoutes()
+    public static function getRoutes()
     {
-        debug(self::$routes);
+        return self::$routes;
     }
 
-    public static function getRoute($query)
+    public static function getRoute()
     {
+        return self::$route;
+    }
+
+    public static function matchRoute($query)
+    {
+        foreach (self::$routes as $k => $r)
+        {
+            if($query==$k)
+            {
+                self::$route = $r;
+                return true;
+            }
+
+            return false;
+        }
     }
 
 
